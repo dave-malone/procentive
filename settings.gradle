@@ -1,0 +1,1 @@
+include 'audit-worker', 'entity-designer', 'form-designer', 'persistence-worker', 'widget-designer', 'workflow-designer', 'workflow-worker'
