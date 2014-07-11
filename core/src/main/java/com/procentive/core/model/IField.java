@@ -7,7 +7,7 @@ package com.procentive.core.model;
  * @author davidmalone
  *
  */
-public interface IField extends IAuditable, IObservableField, IValidatable, Comparable<IField> {
+public interface IField extends IValidatable, Comparable<IField> {
 
 	public enum FieldType{
 		//TODO - what are some field types?

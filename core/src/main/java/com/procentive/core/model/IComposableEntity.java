@@ -10,7 +10,7 @@ import java.util.SortedSet;
  * @author davidmalone
  *
  */
-public interface IComposableEntity extends IAuditable, IObservableEntity, IValidatable {
+public interface IComposableEntity extends IValidatable {
 
 	String getName();
 	IComposableEntity getParent();

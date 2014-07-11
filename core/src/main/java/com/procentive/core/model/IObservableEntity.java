@@ -12,7 +12,7 @@ import java.util.SortedSet;
  * @author davidmalone
  *
  */
-public interface IObservableEntity extends IDirtyable, IObserver {
+public interface IObservableEntity extends IComposableEntity, IDirtyable, IObservable, IObserver {
 
 	IComposableEntity getTarget();
 	Object getPreviousValue();
