@@ -4,7 +4,8 @@ description = 'Procentive 2.0'
 
 apply plugin: 'base'
 
-project(':audit-worker') 
+project(':audit-worker')
+project(':core')
 project(':entity-designer') 
 project(':form-designer') 
 project(':persistence-worker') 
