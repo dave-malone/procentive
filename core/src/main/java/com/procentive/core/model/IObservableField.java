@@ -11,9 +11,5 @@ package com.procentive.core.model;
  *
  */
 public interface IObservableField extends IField, IDirtyable, IObservable {
-
-	IField getTarget();
-	Object getPreviousValue();
-	Object getValue();
 	
 }

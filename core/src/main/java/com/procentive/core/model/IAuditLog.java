@@ -15,7 +15,7 @@ public interface IAuditLog {
 	IUser getUser();
 	Date getDate();
 	IField getField();
-	IComposableEntity getEntity();
+	IEntity getEntity();
 	Object getPreviousValue();
 	Object getValue();
 	

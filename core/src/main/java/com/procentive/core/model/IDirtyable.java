@@ -7,7 +7,7 @@ package com.procentive.core.model;
  * @author davidmalone
  *
  */
-public interface IDirtyable {
+public interface IDirtyable extends IObservable{
 
 	boolean isDirty();
 	

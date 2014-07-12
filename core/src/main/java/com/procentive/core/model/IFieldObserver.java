@@ -8,7 +8,5 @@ package com.procentive.core.model;
  */
 public interface IFieldObserver extends IObserver {
 
-	IField getField();
-	void setField(IField field);
 	
 }

@@ -1,6 +1,5 @@
 package com.procentive.core.model;
 
-import java.util.Set;
 import java.util.SortedSet;
 
 /**
@@ -10,12 +9,9 @@ import java.util.SortedSet;
  * @author davidmalone
  *
  */
-public interface IComposableEntity extends IValidatable {
+public interface IComposableEntity extends IEntity {
 
-	String getName();
-	IComposableEntity getParent();
-	Set<IComposableEntity> getChildren();
-	SortedSet<IField> getFields();
-	boolean isSearchable();
+	SortedSet<? extends IField> getFields();
+	void addField(IField field);
 	
 }
