@@ -6,8 +6,8 @@ package com.procentive.core.model;
  * @author davidmalone
  *
  */
-public interface IObserver {
+public interface IObserver<T extends IObservable> {
 
-	void update(IObservable observable);
+	void update(T observable);
 	
 }

@@ -1,25 +1,30 @@
 package com.procentive.core.model;
 
 
-public class BaseField extends BaseDirtyable implements IField, IObservableField {
+abstract class BaseField<T> extends BaseDirtyable implements IObservableField<T>, IAuditable {
 
-	private String name;
-	private Object value;
-	private String label;
-	private int order;
-	private boolean searchable;
+	protected String name;
+	protected T value;
+	protected String label;
+	protected int order;
+	protected boolean searchable;
 	
 	public BaseField(){}
 	
-	public BaseField(String name, Object value){
+	public BaseField(String name, T value){
 		this.name = name;
 		this.value = value;
 	}
 	
 	@Override
-	public int compareTo(IField field) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int compareTo(IField<T> field) {
+		if(field == null){
+			return 1;
+		}
+		
+		final Integer myOrder = new Integer(this.order);
+		final Integer theirOrder = new Integer(field.getOrder()); 
+		return myOrder.compareTo(theirOrder);
 	}
 
 	@Override
@@ -33,15 +38,14 @@ public class BaseField extends BaseDirtyable implements IField, IObservableField
 	}
 
 	@Override
-	public Object getValue() {
+	public T getValue() {
 		return this.value;
 	}
 
 	@Override
-	public void setValue(Object value) {
+	public void setValue(T value) {
 		this.value = value;
-		setDirty(true);
-		notifyObservers();
+		setAsDirty();
 	}
 
 	@Override
@@ -74,29 +78,5 @@ public class BaseField extends BaseDirtyable implements IField, IObservableField
 		this.searchable = searchable;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BaseField other = (BaseField) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
-	}
 
 }

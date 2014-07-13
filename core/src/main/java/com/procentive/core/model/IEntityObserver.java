@@ -6,9 +6,7 @@ package com.procentive.core.model;
  * @author davidmalone
  *
  */
-public interface IEntityObserver extends IObserver {
+public interface IEntityObserver extends IObserver<IObservableEntity> {
 
-	IEntity getSubject();
-	void setSubject(IEntity entity);
 	
 }

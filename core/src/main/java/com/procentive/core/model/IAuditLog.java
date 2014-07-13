@@ -10,13 +10,11 @@ import java.util.Date;
  * @author davidmalone
  *
  */
-public interface IAuditLog {
+public interface IAuditLog<T> {
 
 	IUser getUser();
 	Date getDate();
-	IField getField();
-	IEntity getEntity();
-	Object getPreviousValue();
-	Object getValue();
+	T getPreviousValue();
+	T getValue();
 	
 }

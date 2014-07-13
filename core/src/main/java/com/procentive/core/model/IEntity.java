@@ -17,5 +17,6 @@ public interface IEntity {
 	void setSearchable(boolean searchable);
 	
 	Object get(String fieldName);
+	void set(String fieldName, Object value);
 	
 }

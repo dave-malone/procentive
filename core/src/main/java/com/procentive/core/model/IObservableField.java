@@ -10,6 +10,6 @@ package com.procentive.core.model;
  * @author davidmalone
  *
  */
-public interface IObservableField extends IField, IDirtyable, IObservable {
+public interface IObservableField<T> extends IField<T>, IDirtyable, IObservable {
 	
 }

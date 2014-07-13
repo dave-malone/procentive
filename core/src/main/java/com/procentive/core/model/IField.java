@@ -1,23 +1,18 @@
 package com.procentive.core.model;
 
 /**
- * A Field is meant to capture data at the most granular of levels. The general idea
- * is that a Field can be validatable, auditable, as well as observable
+ * A Field is meant to capture data at the most granular of levels. 
  * 
  * @author davidmalone
  *
  */
-public interface IField extends Comparable<IField> {
+public interface IField<T> extends Comparable<IField<T>> {
 
-	public enum FieldType{
-		//TODO - what are some field types?
-	}
-	
 	String getName();
 	void setName(String name);
 	
-	Object getValue();
-	void setValue(Object value);
+	T getValue();
+	void setValue(T value);
 	
 	//TODO - create i18n String class
 	String getLabel();

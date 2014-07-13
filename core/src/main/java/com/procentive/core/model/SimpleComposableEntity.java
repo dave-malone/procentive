@@ -9,7 +9,7 @@ import java.util.TreeSet;
 
 import com.procentive.core.exception.FieldDoesNotExistException;
 
-public class BaseComposableEntity extends BaseDirtyable implements IComposableEntity, IObservableEntity {
+public class SimpleComposableEntity extends BaseDirtyable implements IComposableEntity, IObservableEntity {
 
 	private String name;
 	private IEntity parent;
@@ -18,9 +18,9 @@ public class BaseComposableEntity extends BaseDirtyable implements IComposableEn
 	private SortedSet<IField> fields = new TreeSet<IField>();
 	private SortedMap<String, IField> fieldsByName = new TreeMap<String, IField>();
 
-	public BaseComposableEntity(){}
+	public SimpleComposableEntity(){}
 	
-	public BaseComposableEntity(String name){
+	public SimpleComposableEntity(String name){
 		this.name = name;
 	}
 	
@@ -89,15 +89,14 @@ public class BaseComposableEntity extends BaseDirtyable implements IComposableEn
 		return field.getValue();
 	}
 
-	
-
 	@Override
-	public void add(IObserver observer) {
-		if(observer instanceof IEntityObserver){
-			((IEntityObserver) observer).setSubject(this);
+	public void set(String fieldName, Object value) {
+		if(this.fieldsByName.containsKey(fieldName) != true){
+			throw new FieldDoesNotExistException(this, fieldName);
 		}
 		
-		super.add(observer);
+		final IField field = this.fieldsByName.get(fieldName);
+		field.setValue(value);
 	}
 
 	@Override
@@ -105,34 +104,10 @@ public class BaseComposableEntity extends BaseDirtyable implements IComposableEn
 		if(observable instanceof IObservableField){
 			IObservableField observableField = (IObservableField)observable;
 			if(this.fieldsByName.containsKey(observableField.getName()) && observableField.isDirty()){
-				setDirty(true);
+				setAsDirty();
 			}
 		}
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BaseComposableEntity other = (BaseComposableEntity) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
-	}
 	
 }
