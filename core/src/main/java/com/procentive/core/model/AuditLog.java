@@ -9,8 +9,9 @@ public class AuditLog<T> implements IAuditLog<T> {
 	private final T previousValue;
 	private final T value;
 	
-	public AuditLog(IUser user, T previousValue, T value) {
-		this.user = user;
+	AuditLog(T previousValue, T value) {
+		//TODO - inline call to UserUtil.getCurrentUser() or something like that
+		this.user = null;
 		this.previousValue = previousValue;
 		this.value = value;
 	}

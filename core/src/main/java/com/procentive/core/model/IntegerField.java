@@ -3,15 +3,15 @@ package com.procentive.core.model;
 
 class IntegerField extends BaseField<Integer> {
 
-	public IntegerField(String fieldName, String value){
+	IntegerField(String fieldName, String value){
 		this(fieldName, Integer.valueOf(value));
 	}
 	
-	public IntegerField(String fieldName, int value){
+	IntegerField(String fieldName, int value){
 		this(fieldName, new Integer(value));
 	}
 	
-	public IntegerField(String fieldName, Integer value){
+	IntegerField(String fieldName, Integer value){
 		this.name = fieldName;
 		this.value = value;
 	}

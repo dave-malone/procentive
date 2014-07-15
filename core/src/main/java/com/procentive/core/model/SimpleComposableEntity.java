@@ -9,18 +9,18 @@ import java.util.TreeSet;
 
 import com.procentive.core.exception.FieldDoesNotExistException;
 
-public class SimpleComposableEntity extends BaseDirtyable implements IComposableEntity, IObservableEntity {
+public class SimpleComposableEntity implements IComposableEntity {
 
 	private String name;
 	private IEntity parent;
 	private Set<IEntity> children = new HashSet<IEntity>();
 	private boolean searchable;
-	private SortedSet<IField> fields = new TreeSet<IField>();
-	private SortedMap<String, IField> fieldsByName = new TreeMap<String, IField>();
+	private SortedSet<IField<?>> fields = new TreeSet<IField<?>>();
+	private SortedMap<String, IField<?>> fieldsByName = new TreeMap<String, IField<?>>();
 
-	public SimpleComposableEntity(){}
+	SimpleComposableEntity(){}
 	
-	public SimpleComposableEntity(String name){
+	SimpleComposableEntity(String name){
 		this.name = name;
 	}
 	
@@ -44,20 +44,18 @@ public class SimpleComposableEntity extends BaseDirtyable implements IComposable
 		return this.searchable;
 	}
 
-
-	@Override
-	public SortedSet<IField> getFields() {
+	public SortedSet<IField<?>> getFields() {
 		return this.fields;
 	}
-
+	
 	@Override
-	public void addField(IField field) {
-		this.fields.add(field);
-		this.fieldsByName.put(field.getName(), field);
-		if(field instanceof IObservableField){
-			((IObservableField) field).add(this);
+	public void addField(IField<?> field) {
+		if(field != null){
+			this.fields.add(field);
+			this.fieldsByName.put(field.getName(), field);
 		}
 	}
+
 
 	@Override
 	public void setName(String name) {
@@ -80,7 +78,7 @@ public class SimpleComposableEntity extends BaseDirtyable implements IComposable
 	}
 
 	@Override
-	public Object get(String fieldName) {
+	public Object getFieldValue(String fieldName) {
 		if(this.fieldsByName.containsKey(fieldName) != true){
 			throw new FieldDoesNotExistException(this, fieldName);
 		}
@@ -90,7 +88,7 @@ public class SimpleComposableEntity extends BaseDirtyable implements IComposable
 	}
 
 	@Override
-	public void set(String fieldName, Object value) {
+	public void setFieldValue(String fieldName, Object value) {
 		if(this.fieldsByName.containsKey(fieldName) != true){
 			throw new FieldDoesNotExistException(this, fieldName);
 		}
@@ -100,13 +98,8 @@ public class SimpleComposableEntity extends BaseDirtyable implements IComposable
 	}
 
 	@Override
-	public void update(IObservable observable) {
-		if(observable instanceof IObservableField){
-			IObservableField observableField = (IObservableField)observable;
-			if(this.fieldsByName.containsKey(observableField.getName()) && observableField.isDirty()){
-				setAsDirty();
-			}
-		}
+	public String toString(){
+		return "SimpleComposableEntity [name=" + name + "]";
 	}
 
 	

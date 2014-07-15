@@ -2,7 +2,7 @@ package com.procentive.core.model;
 
 public class EntityFactory {
 
-	public static IEntity getByName(String entityName){
+	public static IComposableEntity getByName(String entityName){
 		/*
 		 * Basically, entities will be constructed here, with all of their fields,
 		 * registered observers, etc.
@@ -11,7 +11,13 @@ public class EntityFactory {
 		 * for now, probably simply back the models in a local map, use the prototype pattern
 		 * to return ready-to-use prototypes for consumers.
 		 */
-		return null;
+		final IComposableEntity composableEntity = new ComposableEntityProxy(new SimpleComposableEntity());
+		composableEntity.addField(new StringField("field1"));
+		composableEntity.addField(new StringField("field2"));
+		composableEntity.addField(new StringField("field3"));
+		
+		
+		return composableEntity;
 	}
 	
 }

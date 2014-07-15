@@ -1,7 +1,7 @@
 package com.procentive.core.model;
 
 
-abstract class BaseField<T> extends BaseDirtyable implements IObservableField<T>, IAuditable {
+abstract class BaseField<T> implements IField<T>, IAuditable {
 
 	protected String name;
 	protected T value;
@@ -9,9 +9,9 @@ abstract class BaseField<T> extends BaseDirtyable implements IObservableField<T>
 	protected int order;
 	protected boolean searchable;
 	
-	public BaseField(){}
+	BaseField(){}
 	
-	public BaseField(String name, T value){
+	BaseField(String name, T value){
 		this.name = name;
 		this.value = value;
 	}
@@ -45,7 +45,6 @@ abstract class BaseField<T> extends BaseDirtyable implements IObservableField<T>
 	@Override
 	public void setValue(T value) {
 		this.value = value;
-		setAsDirty();
 	}
 
 	@Override
