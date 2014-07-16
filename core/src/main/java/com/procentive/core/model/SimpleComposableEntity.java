@@ -18,9 +18,9 @@ public class SimpleComposableEntity implements IComposableEntity {
 	private SortedSet<IField<?>> fields = new TreeSet<IField<?>>();
 	private SortedMap<String, IField<?>> fieldsByName = new TreeMap<String, IField<?>>();
 
-	SimpleComposableEntity(){}
+	public SimpleComposableEntity(){}
 	
-	SimpleComposableEntity(String name){
+	public SimpleComposableEntity(String name){
 		this.name = name;
 	}
 	

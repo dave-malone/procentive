@@ -2,7 +2,9 @@ package com.procentive.core.model;
 
 public class StringField extends BaseField<String> {
 
-	public StringField(String fieldName) {
+	StringField(){}
+	
+	StringField(String fieldName) {
 		this.name = fieldName;
 	}
 	

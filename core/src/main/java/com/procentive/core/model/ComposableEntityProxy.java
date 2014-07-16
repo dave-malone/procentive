@@ -14,6 +14,14 @@ public class ComposableEntityProxy implements IComposableEntity, IObserver<Audit
 	
 	ComposableEntityProxy(IComposableEntity target){
 		this.target = target;
+		
+		final List<IField<?>> fieldsFromTarget = new ArrayList<IField<?>>(this.target.getFields());
+		
+		this.target.getFields().clear();
+		
+		for(IField<?> field : fieldsFromTarget){
+			addField(field);
+		}
 	}
 
 	@Override

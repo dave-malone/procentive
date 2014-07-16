@@ -1,8 +1,17 @@
 package com.procentive.core.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.procentive.core.repository.IComposableEntityDefinitionRepository;
+
+@Component
 public class EntityFactory {
 
-	public static IComposableEntity getByName(String entityName){
+	@Autowired
+	IComposableEntityDefinitionRepository composableEntityDefinitionRepository;
+	
+	public IComposableEntity getByName(String entityName){
 		/*
 		 * Basically, entities will be constructed here, with all of their fields,
 		 * registered observers, etc.
@@ -11,13 +20,8 @@ public class EntityFactory {
 		 * for now, probably simply back the models in a local map, use the prototype pattern
 		 * to return ready-to-use prototypes for consumers.
 		 */
-		final IComposableEntity composableEntity = new ComposableEntityProxy(new SimpleComposableEntity());
-		composableEntity.addField(new StringField("field1"));
-		composableEntity.addField(new StringField("field2"));
-		composableEntity.addField(new StringField("field3"));
-		
-		
-		return composableEntity;
+		final IComposableEntity composableEntity = composableEntityDefinitionRepository.loadEntityDefinition(entityName);
+		return new ComposableEntityProxy(composableEntity);
 	}
 	
 }

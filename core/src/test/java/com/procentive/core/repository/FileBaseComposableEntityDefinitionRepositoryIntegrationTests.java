@@ -1,6 +1,6 @@
 package com.procentive.core.repository;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,30 +9,24 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.procentive.core.config.CoreConfiguration;
-import com.procentive.core.model.EntityFactory;
 import com.procentive.core.model.IComposableEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={CoreConfiguration.class})
-public class ComposableEntityRepositoryIntegrationTests {
+public class FileBaseComposableEntityDefinitionRepositoryIntegrationTests {
 
 	@Autowired
-	ComposableEntityRepository repository;
-	
-	@Autowired
-	EntityFactory entityFactory;
+	FileBaseComposableEntityDefinitionRepository repository;
 	
 	@Test
 	public void testSave() {
 		assertNotNull(repository);
-		assertNotNull(entityFactory);
 		
-		IComposableEntity composableEntity = entityFactory.getByName("patient");
+		String entityName = "patient";
+		IComposableEntity composableEntity = repository.loadEntityDefinition(entityName);
 		assertNotNull(composableEntity);
-		composableEntity.setFieldValue("firstName", "John");
-		composableEntity.setFieldValue("lastName", "Doe");
-		
-		repository.save(composableEntity);
+		assertTrue(entityName.equalsIgnoreCase(composableEntity.getName()));
+		assertFalse(composableEntity.getFields().isEmpty());
 	}
 
 }

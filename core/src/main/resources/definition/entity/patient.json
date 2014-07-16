@@ -1,0 +1,9 @@
+{
+  "name":"Patient",
+  "validators":[],
+  "fields":[
+  	{"name":"firstName", "type":"string", "label":"First Name", "searchable":true, "order":0, "validators":[]},
+  	{"name":"lastName", "type":"string", "label":"Last Name", "searchable":true, "order":1, "validators":[]},
+  	{"name":"dateOfBirth", "type":"date", "label":"Date of Birth", "searchable":true, "order":2, "validators":[]}
+  ]
+}
