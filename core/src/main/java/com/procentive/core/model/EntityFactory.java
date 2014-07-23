@@ -20,6 +20,8 @@ public class EntityFactory {
 		 * for now, probably simply back the models in a local map, use the prototype pattern
 		 * to return ready-to-use prototypes for consumers.
 		 */
+		//TODO - only look the entity up from the repo if it's not in a local cache; if it is in the cache, then 
+		//return a prototype of the assembled model
 		final IComposableEntity composableEntity = composableEntityDefinitionRepository.loadEntityDefinition(entityName);
 		return new ComposableEntityProxy(composableEntity);
 	}

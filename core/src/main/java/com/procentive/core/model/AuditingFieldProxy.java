@@ -7,7 +7,7 @@ public class AuditingFieldProxy<T> implements IField<T>, IObservable {
 
 	private final IField<T> target;
 	private final List<IObserver<?>> observers = new ArrayList<IObserver<?>>();
-	private AuditLog<T> auditLog;
+	private ChangeLog<T> changeLog;
 	private boolean dirty;
 	
 	AuditingFieldProxy(IField<T> target){
@@ -34,7 +34,7 @@ public class AuditingFieldProxy<T> implements IField<T>, IObservable {
 		T oldValue = target.getValue();
 		target.setValue(newValue);
 		if((oldValue == null && newValue != null) || (oldValue != null && oldValue.equals(newValue) != true)){
-			this.auditLog = new AuditLog<T>(oldValue, newValue);
+			this.changeLog = new ChangeLog<T>(oldValue, newValue);
 			this.dirty = true;
 			notifyObservers();
 		}
@@ -96,8 +96,8 @@ public class AuditingFieldProxy<T> implements IField<T>, IObservable {
 		return observers;
 	}
 
-	public AuditLog<T> getAuditLog() {
-		return auditLog;
+	public ChangeLog<T> getAuditLog() {
+		return changeLog;
 	}
 	
 	@Override

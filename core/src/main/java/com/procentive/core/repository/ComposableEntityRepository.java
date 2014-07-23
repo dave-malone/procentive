@@ -13,7 +13,7 @@ public class ComposableEntityRepository implements IEntityRepository<IComposable
 	
 	@Override
 	public void save(IComposableEntity entity){
-		log.debug("saving entity "+ entity);
+		log.debug("saving entity " + entity);
 	}
 
 }
