@@ -9,10 +9,15 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import com.procentive.core.event.EntityUpdatedEvent;
+import com.procentive.core.event.FieldUpdatedEvent;
 import com.procentive.core.model.AuditingFieldProxy;
 import com.procentive.core.model.ComposableEntityProxy;
+import com.procentive.core.model.IEntity;
 import com.procentive.core.model.IField;
 
 @Component @Aspect
@@ -20,14 +25,18 @@ public class CoreAspects{
 
 	private static final Logger log = LoggerFactory.getLogger(CoreAspects.class);
 	
+	@Autowired
+	private ApplicationContext applicationContext;
+
 	@Around("execution(* com.procentive.core.repository.ComposableEntityRepository.save(..))")
 	public void doAroundSimpleComposableEntityRepositorySave(final ProceedingJoinPoint joinPoint) throws Throwable {
 		if(log.isDebugEnabled()){
 			log.debug("before save");
 			log.debug("args: " + Arrays.toString(joinPoint.getArgs()));
 		}
-		
-		//look for registered BeforeSaveListeners and notify
+
+		//TODO - add tracking so we know which entities are 'new', then after saving them, propagate EntityCreatedEvent for each
+		final List<IEntity> createdEntities = new ArrayList<IEntity>();
 		final List<ComposableEntityProxy> updatedEntities = new ArrayList<ComposableEntityProxy>();
 		final List<AuditingFieldProxy<?>> updatedFields = new ArrayList<AuditingFieldProxy<?>>();
 		
@@ -65,13 +74,15 @@ public class CoreAspects{
 		for(ComposableEntityProxy entityProxy : updatedEntities){
 			//clear dirty state for each entity
 			entityProxy.setDirty(false);
-			//TODO - create & propagate entity created/updated event
+			//create & propagate entity created/updated event
+			applicationContext.publishEvent(new EntityUpdatedEvent(this, entityProxy.getTarget()));
 		}
 		
 		for(AuditingFieldProxy<?> fieldProxy : updatedFields){
 			//clear dirty state for each field
 			fieldProxy.setDirty(false);
-			//TODO - propagate field updated event (assuming that there's no such thing as a "field created" event
+			//propagate field updated event (assuming that there's no such thing as a "field created" event
+			applicationContext.publishEvent(new FieldUpdatedEvent(this, fieldProxy.getTarget(), fieldProxy.getAuditLog()));
 		}
 	}
 	

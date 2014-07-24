@@ -13,10 +13,10 @@ import com.procentive.core.model.IComposableEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={CoreConfiguration.class})
-public class FileBaseComposableEntityDefinitionRepositoryIntegrationTests {
+public class FileBasedComposableEntityDefinitionRepositoryIntegrationTests {
 
 	@Autowired
-	FileBaseComposableEntityDefinitionRepository repository;
+	FileBasedComposableEntityDefinitionRepository repository;
 	
 	@Test
 	public void testSave() {

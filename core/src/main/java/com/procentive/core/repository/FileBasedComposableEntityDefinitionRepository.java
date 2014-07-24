@@ -22,9 +22,9 @@ import com.procentive.core.model.SimpleComposableEntity;
  *
  */
 @Repository
-public class FileBaseComposableEntityDefinitionRepository implements IComposableEntityDefinitionRepository {
+public class FileBasedComposableEntityDefinitionRepository implements IComposableEntityDefinitionRepository {
 
-	private static final Logger log = LoggerFactory.getLogger(FileBaseComposableEntityDefinitionRepository.class);
+	private static final Logger log = LoggerFactory.getLogger(FileBasedComposableEntityDefinitionRepository.class);
 	
 	@Autowired
 	ObjectMapper objectMapper;

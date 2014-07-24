@@ -1,0 +1,47 @@
+apply plugin: 'war'
+apply plugin: 'tomcat'
+apply plugin: 'eclipse-wtp'
+
+//war.archiveName = "procentive-entity-designer.war"
+
+buildscript {
+	repositories {
+		maven { url 'http://jcenter.bintray.com' }
+		mavenLocal()
+	}
+	dependencies {
+		classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:1.0'
+	}
+}
+
+tomcatRun {
+	httpPort = 8080
+	stopPort = 8005
+}
+
+tomcatRunWar {
+	httpPort = 8080
+	stopPort = 8005
+}
+
+repositories {
+	mavenCentral()
+	maven { url "http://repo.spring.io/libs-snapshot" }
+}
+
+dependencies {
+	compile group:'org.springframework', name:'spring-webmvc', version:springVersion
+			
+	providedCompile 'javax.servlet:servlet-api:2.5'
+	
+	//This is required by the Tomcat plugin
+	def tomcatVersion = '6.0.29'
+	tomcat "org.apache.tomcat:catalina:${tomcatVersion}",
+		   "org.apache.tomcat:coyote:${tomcatVersion}",
+		   "org.apache.tomcat:jasper:${tomcatVersion}"
+//
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = gradleWrapperVersion
+}
