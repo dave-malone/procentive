@@ -1,4 +1,4 @@
-package com.procentive.core.aop;
+package com.procentive.core.aspect;
 
 import java.util.ArrayList;
 import java.util.Arrays;

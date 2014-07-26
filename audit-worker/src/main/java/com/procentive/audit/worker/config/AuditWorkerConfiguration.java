@@ -1,4 +1,4 @@
-package com.procentive.workflow.worker.config;
+package com.procentive.audit.worker.config;
 
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
@@ -16,7 +16,7 @@ import com.procentive.core.listener.LoggingMessageListener;
 
 @Configuration
 @Import({RabbitMQConfiguration.class})
-public class WorkflowWorkerConfiguration {
+public class AuditWorkerConfiguration {
 
 	/**
 	 * This main method has been setup simply to demonstrate the ability to receive messages from a RabbitMQ server
@@ -24,7 +24,7 @@ public class WorkflowWorkerConfiguration {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception{
-		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(WorkflowWorkerConfiguration.class);
+		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AuditWorkerConfiguration.class);
 	}
 	
 	@Bean
@@ -38,7 +38,7 @@ public class WorkflowWorkerConfiguration {
 	
     @Bean
     AdaptableMessageListener messageListener() {
-        return new LoggingMessageListener("WorkflowWorker");
+        return new LoggingMessageListener("AuditWorker");
     }
 
     @Bean 
