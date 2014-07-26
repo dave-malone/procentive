@@ -1,6 +1,3 @@
 dependencies {
-	compile 'org.aspectj:aspectjrt:1.8.1'
-	compile 'org.springframework.amqp:spring-rabbit:1.3.5.RELEASE'
-	runtime 'org.springframework:spring-aop:$springVersion'
-	runtime 'org.aspectj:aspectjweaver:1.8.1'
+	
 }
