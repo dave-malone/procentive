@@ -105,5 +105,15 @@ public class AuditingFieldProxy<T> implements IField<T>, IObservable {
 		return target.toString();
 	}
 
+	@Override
+	public int hashCode() {
+		return target.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return target.equals(obj);
+	}
+	
 }
 

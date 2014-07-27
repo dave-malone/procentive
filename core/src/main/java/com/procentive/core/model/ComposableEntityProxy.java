@@ -114,6 +114,25 @@ public class ComposableEntityProxy implements IComposableEntity, IObserver<Audit
 	public List<IField<?>> getDirtyFields() {
 		return dirtyFields;
 	}
+
+	public IField<?> getFieldByName(String fieldName) {
+		for(IField<?> field : target.getFields()){
+			if(fieldName.equals(field.getName())){
+				return field;
+			}
+		}
+		
+		return null;
+	}
 	
+	@Override
+	public int hashCode() {
+		return target.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return target.equals(obj);
+	}
 	
 }

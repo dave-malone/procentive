@@ -1,12 +1,11 @@
 package com.procentive.core.model;
 
-
 abstract class BaseField<T> implements IField<T>, IAuditable {
 
 	protected String name;
 	protected T value;
 	protected String label;
-	protected int order;
+	protected int order = -1;
 	protected boolean searchable;
 	
 	BaseField(){}

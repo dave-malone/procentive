@@ -51,7 +51,14 @@ public class SimpleComposableEntity implements IComposableEntity {
 	@Override
 	public void addField(IField<?> field) {
 		if(field != null){
-			this.fields.add(field);
+			if(field.getOrder() == -1){
+				field.setOrder(this.fields.size());
+			}
+			
+			boolean added = this.fields.add(field);
+			if(!added){
+				throw new RuntimeException("Field " + field.getName() + " was not added; the underlying Set wouldn't take it");
+			}
 			this.fieldsByName.put(field.getName(), field);
 		}
 	}

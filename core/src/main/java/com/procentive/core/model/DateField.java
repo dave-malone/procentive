@@ -17,8 +17,7 @@ class DateField extends BaseField<Date> {
 	}
 	
 	DateField(String fieldName, Date value){
-		this.name = fieldName;
-		this.value = value;
+		super(fieldName, value);
 	}
 	
 }

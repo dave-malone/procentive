@@ -53,3 +53,10 @@ This will ensure that the Gradle Wrapper is working on your machine and that you
 ## Installing RabbitMQ
 
 TODO - add instructions; or link to RabbitMQ documentation
+
+
+### RabbitMQ Management Console
+http://localhost:15672/
+Default username & password: guest:guest
+
+Documentation: http://www.rabbitmq.com/management.html
