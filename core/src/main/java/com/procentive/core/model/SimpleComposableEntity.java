@@ -1,7 +1,5 @@
 package com.procentive.core.model;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
@@ -12,8 +10,6 @@ import com.procentive.core.exception.FieldDoesNotExistException;
 public class SimpleComposableEntity implements IComposableEntity {
 
 	private String name;
-	private IEntity parent;
-	private Set<IEntity> children = new HashSet<IEntity>();
 	private boolean searchable;
 	private SortedSet<IField<?>> fields = new TreeSet<IField<?>>();
 	private SortedMap<String, IField<?>> fieldsByName = new TreeMap<String, IField<?>>();
@@ -23,20 +19,10 @@ public class SimpleComposableEntity implements IComposableEntity {
 	public SimpleComposableEntity(String name){
 		this.name = name;
 	}
-	
+
 	@Override
 	public String getName() {
 		return this.name;
-	}
-
-	@Override
-	public IEntity getParent() {
-		return this.parent;
-	}
-
-	@Override
-	public Set<IEntity> getChildren() {
-		return this.children;
 	}
 
 	@Override
@@ -67,16 +53,6 @@ public class SimpleComposableEntity implements IComposableEntity {
 	@Override
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	@Override
-	public void setParent(IEntity parent) {
-		this.parent = parent;
-	}
-
-	@Override
-	public void addChild(IEntity child) {
-		this.children.add(child);
 	}
 
 	@Override

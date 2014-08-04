@@ -66,43 +66,6 @@ public class ComposableEntityProxyTest {
 		assertEquals(proxy.getTarget().getName(), proxy.getName());
 	}
 
-	@Test
-	public void testGetParentIsNullWithoutParentBeingSet() {
-		assertNull(proxy.getParent());
-		assertNull(proxy.getTarget().getParent());
-	}
-
-	@Test
-	public void testSetParent() {
-		String parentName = "Test Parent";
-		this.proxy.setParent(new SimpleComposableEntity(parentName));
-		assertNotNull(proxy.getParent());
-		assertNotNull(proxy.getTarget().getParent());
-		
-		assertEquals(parentName, proxy.getParent().getName());
-		assertEquals(parentName, proxy.getTarget().getParent().getName());
-		assertEquals(proxy.getTarget().getParent().getName(), proxy.getParent().getName());
-	}
-
-	@Test
-	public void testGetChildrenIsEmptyWithoutAnyChildElements() {
-		assertTrue(proxy.getChildren().isEmpty());
-		assertTrue(proxy.getTarget().getChildren().isEmpty());
-	}
-
-	@Test
-	public void testAddChild() {
-		assertTrue(proxy.getChildren().isEmpty());
-		assertTrue(proxy.getTarget().getChildren().isEmpty());
-		
-		proxy.addChild(new SimpleComposableEntity("Test Child"));
-		
-		assertFalse(proxy.getChildren().isEmpty());
-		assertFalse(proxy.getTarget().getChildren().isEmpty());
-		
-		assertEquals(1, proxy.getChildren().size());
-		assertEquals(1, proxy.getTarget().getChildren().size());
-	}
 
 	@Test
 	public void testIsSearchableFalseByDefault() {

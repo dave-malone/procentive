@@ -13,11 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import com.procentive.core.event.EntityUpdatedEvent;
+import com.procentive.core.event.ComposableEntityUpdatedEvent;
 import com.procentive.core.event.FieldUpdatedEvent;
 import com.procentive.core.model.AuditingFieldProxy;
 import com.procentive.core.model.ComposableEntityProxy;
-import com.procentive.core.model.IEntity;
+import com.procentive.core.model.IComposableEntity;
 import com.procentive.core.model.IField;
 
 @Component @Aspect
@@ -36,7 +36,7 @@ public class CoreAspects{
 		}
 
 		//TODO - add tracking so we know which entities are 'new', then after saving them, propagate EntityCreatedEvent for each
-		final List<IEntity> createdEntities = new ArrayList<IEntity>();
+		final List<IComposableEntity> createdEntities = new ArrayList<IComposableEntity>();
 		final List<ComposableEntityProxy> updatedEntities = new ArrayList<ComposableEntityProxy>();
 		final List<AuditingFieldProxy<?>> updatedFields = new ArrayList<AuditingFieldProxy<?>>();
 		
@@ -75,7 +75,7 @@ public class CoreAspects{
 			//clear dirty state for each entity
 			entityProxy.setDirty(false);
 			//create & propagate entity created/updated event
-			applicationContext.publishEvent(new EntityUpdatedEvent(this, entityProxy.getTarget()));
+			applicationContext.publishEvent(new ComposableEntityUpdatedEvent(this, entityProxy.getTarget()));
 		}
 		
 		for(AuditingFieldProxy<?> fieldProxy : updatedFields){

@@ -3,7 +3,6 @@ package com.procentive.core.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.SortedSet;
 
 public class ComposableEntityProxy implements IComposableEntity, IObserver<AuditingFieldProxy<?>> {
@@ -32,26 +31,6 @@ public class ComposableEntityProxy implements IComposableEntity, IObserver<Audit
 	@Override
 	public void setName(String name) {
 		target.setName(name);
-	}
-
-	@Override
-	public IEntity getParent() {
-		return target.getParent();
-	}
-
-	@Override
-	public void setParent(IEntity parent) {
-		target.setParent(parent);
-	}
-
-	@Override
-	public Set<IEntity> getChildren() {
-		return target.getChildren();
-	}
-
-	@Override
-	public void addChild(IEntity child) {
-		target.addChild(child);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package com.procentive.workflow.model;
 
+import java.util.Date;
+
 /**
  * The initiator of a workflow
  * @author davidmalone
@@ -7,4 +9,6 @@ package com.procentive.workflow.model;
  */
 public interface IActivation {
 
+	Date getDate();
+	
 }

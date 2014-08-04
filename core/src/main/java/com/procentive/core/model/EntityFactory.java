@@ -3,13 +3,17 @@ package com.procentive.core.model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.procentive.core.repository.IComposableEntityDefinitionRepository;
+import com.procentive.core.repository.IComposableEntityRegistry;
 
 @Component
 public class EntityFactory {
 
+	private final IComposableEntityRegistry composableEntityRegistry;
+	
 	@Autowired
-	IComposableEntityDefinitionRepository composableEntityDefinitionRepository;
+	public EntityFactory(IComposableEntityRegistry composableEntityRegistry){
+		this.composableEntityRegistry =  composableEntityRegistry;
+	}
 	
 	public IComposableEntity getByName(String entityName){
 		/*
@@ -20,9 +24,16 @@ public class EntityFactory {
 		 * for now, probably simply back the models in a local map, use the prototype pattern
 		 * to return ready-to-use prototypes for consumers.
 		 */
-		//TODO - only look the entity up from the repo if it's not in a local cache; if it is in the cache, then 
+		
+		//only look the entity up from the repo if it's not in a local cache; if it is in the cache, then 
 		//return a prototype of the assembled model
-		final IComposableEntity composableEntity = composableEntityDefinitionRepository.loadEntityDefinition(entityName);
+		
+		IComposableEntity composableEntity = composableEntityRegistry.findByName(entityName);
+		
+		if(composableEntity == null){
+			throw new IllegalArgumentException("Unable to find a ComposableEntity definition with name " + entityName);
+		}
+		
 		return new ComposableEntityProxy(composableEntity);
 	}
 	

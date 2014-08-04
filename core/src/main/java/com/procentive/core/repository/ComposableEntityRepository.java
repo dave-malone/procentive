@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.procentive.core.model.IComposableEntity;
 
 @Repository
-public class ComposableEntityRepository implements IEntityRepository<IComposableEntity>{
+public class ComposableEntityRepository implements IComposableEntityRepository<IComposableEntity>{
 
 	private static final Logger log = LoggerFactory.getLogger(ComposableEntityRepository.class);
 	

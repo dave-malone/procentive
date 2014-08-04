@@ -13,20 +13,29 @@ import com.procentive.core.model.IComposableEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={CoreConfiguration.class})
-public class FileBasedComposableEntityDefinitionRepositoryIntegrationTests {
+public class FileBasedComposableEntityRegistryIntegrationTests {
 
 	@Autowired
-	FileBasedComposableEntityDefinitionRepository repository;
+	FileBasedComposableEntityRegistry repository;
 	
 	@Test
-	public void testSave() {
-		assertNotNull(repository);
-		
+	public void testFindByName() {
 		String entityName = "patient";
-		IComposableEntity composableEntity = repository.loadEntityDefinition(entityName);
+		IComposableEntity composableEntity = repository.findByName(entityName);
 		assertNotNull(composableEntity);
 		assertTrue(entityName.equalsIgnoreCase(composableEntity.getName()));
 		assertFalse(composableEntity.getFields().isEmpty());
+	}
+	
+	@Test
+	public void testFindByName10000Times() {
+		String entityName = "patient";
+		for(int i = 0; i < 10000; i++){
+			IComposableEntity composableEntity = repository.findByName(entityName);
+			assertNotNull(composableEntity);
+			assertTrue(entityName.equalsIgnoreCase(composableEntity.getName()));
+			assertFalse(composableEntity.getFields().isEmpty());
+		}
 	}
 
 }

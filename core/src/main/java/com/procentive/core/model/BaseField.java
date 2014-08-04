@@ -1,6 +1,6 @@
 package com.procentive.core.model;
 
-abstract class BaseField<T> implements IField<T>, IAuditable {
+public abstract class BaseField<T> implements IField<T>, IAuditable {
 
 	protected String name;
 	protected T value;
@@ -15,6 +15,12 @@ abstract class BaseField<T> implements IField<T>, IAuditable {
 		this.value = value;
 	}
 	
+	@Override
+	public IField<T> clone() throws CloneNotSupportedException {
+		final IField<T> clonedField = (IField<T>) super.clone();
+		return clonedField;
+	}
+
 	@Override
 	public int compareTo(IField<T> field) {
 		if(field == null){

@@ -22,15 +22,15 @@ import com.procentive.core.model.SimpleComposableEntity;
  *
  */
 @Repository
-public class FileBasedComposableEntityDefinitionRepository implements IComposableEntityDefinitionRepository {
+public class FileBasedComposableEntityRegistry implements IComposableEntityRegistry {
 
-	private static final Logger log = LoggerFactory.getLogger(FileBasedComposableEntityDefinitionRepository.class);
+	private static final Logger log = LoggerFactory.getLogger(FileBasedComposableEntityRegistry.class);
 	
 	@Autowired
 	ObjectMapper objectMapper;
 	
 	@Override
-	public IComposableEntity loadEntityDefinition(String entityName) {
+	public IComposableEntity findByName(String entityName) {
 		final String entityJsonFilename = "definition/entity/" + entityName + ".json";
 		final Resource resource = new ClassPathResource(entityJsonFilename);
 		if(resource.exists()){
